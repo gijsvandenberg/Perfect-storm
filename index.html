@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattern Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.0/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5.brush"></script>
+    <script src="https://brandguid.es/js/p5blend.js"></script>
+    <script src="script.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f5f5f7;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        h1 {
+            color: #1d1d1f;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .controls-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 300px;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group h3 {
+            color: #1d1d1f;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .slider-container {
+            margin-bottom: 1rem;
+        }
+
+        .slider-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4f4f4f;
+            font-size: 0.9rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-display {
+            font-size: 0.8rem;
+            color: #666;
+            text-align: right;
+        }
+
+        button {
+            background-color: #0071e3;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        button:hover {
+            background-color: #0077ed;
+        }
+
+        canvas {
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .keyboard-shortcuts {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .keyboard-shortcuts h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .keyboard-shortcuts p {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="controls-panel">
+            <div class="control-group">
+                <h3>Color Controls</h3>
+                <div class="slider-container">
+                    <label for="hueSlider">Base Hue</label>
+                    <input type="range" id="hueSlider" min="0" max="360" value="220">
+                    <div class="value-display">220°</div>
+                </div>
+                <div class="slider-container">
+                    <label for="hueRangeSlider">Hue Range</label>
+                    <input type="range" id="hueRangeSlider" min="10" max="60" value="30">
+                    <div class="value-display">30°</div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>Pattern Controls</h3>
+                  <div class="slider-container">
+                    <label for="blobSizeSlider">Blob Size</label>
+                    <input type="range" id="blobSizeSlider" min="0.5" max="2" step="0.1" value="1">
+                    <div class="value-display">1</div>
+                </div>
+                <div class="slider-container">
+                    <label for="nodesSlider">Number of Nodes</label>
+                    <input type="range" id="nodesSlider" min="6" max="20" value="12">
+                    <div class="value-display">12</div>
+                </div>
+                <div class="slider-container">
+                    <label for="minDistanceSlider">Minimum Distance</label>
+                    <input type="range" id="minDistanceSlider" min="50" max="200" value="100">
+                    <div class="value-display">100px</div>
+                </div>
+            </div>
+
+            <button id="generateBtn">Generate New Pattern</button>
+            <button id="saveBtn">Save Artwork</button>
+
+            <div class="keyboard-shortcuts">
+                <h3>Keyboard Shortcuts</h3>
+                <p>'R' - Generate new artwork</p>
+                <p>'S' - Save current artwork</p>
+            </div>
+        </div>
+        <div id="canvasContainer"></div>
+    </div>
+</body>
+</html>
